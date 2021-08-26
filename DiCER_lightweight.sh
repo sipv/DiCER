@@ -272,4 +272,9 @@ if $freesurfer;then
     printf "\n\n Now using the regression time series and regressing them from the original input \n\n\n"
     input=${output_folder}/${input_file}
     python carpetCleaning/vacuum_dbscan.py -f $orig -db $regressor_dbscan -s $subject -d ${folder}/
+
+    # Reorder the created files
+    python hcp_processing/reshapeSurfaceNifti.py --backward -f $output_folder/func_temp.nii.gz        -o $output_folder/func_temp_correctorder.nii.gz
+    python hcp_processing/reshapeSurfaceNifti.py --backward -f $output_folder/func_temp_GMR.nii.gz    -o $output_folder/func_temp_correctorder_GMR.nii.gz
+    python hcp_processing/reshapeSurfaceNifti.py --backward -f $output_folder/func_temp_dbscan.nii.gz -o $output_folder/func_temp_correctorder_dbscan.nii.gz
 fi
