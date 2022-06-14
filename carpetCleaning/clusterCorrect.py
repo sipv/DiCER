@@ -399,7 +399,7 @@ Xd = Xd[rowOrdering,:]
 #---------------------------------------------------------------------------
 # Set parameters on data shape
 numVoxels,numTime = Xd.shape
-minSamplesDense = np.ceil(numVoxels*propSamplesDense)
+minSamplesDense = np.ceil(numVoxels*propSamplesDense).astype('int')
 print('Clustering %s' % ts_file)
 print('Using eps = %f, minSamplesDense = %u (/%u)' % (eps,minSamplesDense,numVoxels))
 
@@ -450,8 +450,8 @@ while numRegressorsNow > 0:
         numRegressorPerIteration = np.append(numRegressorPerIteration,numRegressorsNow)
     else:
         if numRegressorsNow > 0:
-            regressors = np.append(regressors,regressorsNow,axis=0)            
-            # Just a command here to store how many regressors only if 
+            regressors = np.append(regressors,regressorsNow,axis=0)
+            # Just a command here to store how many regressors only if
             numRegressorPerIteration = np.append(numRegressorPerIteration,numRegressorsNow)
     itNum = itNum + 1
     if (numRegressorsNow > 0) and (itNum > maxIterations):
